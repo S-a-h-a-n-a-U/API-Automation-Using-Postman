@@ -80,8 +80,16 @@
               "    pm.expect(response.bookingid).to.not.be.undefined;\r",
               "});\r",
               "\r",
-              "pm.test(\"Firstname is John\", function () {\r",
-              "    pm.expect(response.booking.firstname).to.eql(\"John\");\r",
+              "pm.test(\"Firstname is correct\", function () {\r",
+              "    pm.expect(response.booking.firstname).to.eql(pm.iterationData.get(\"firstname\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Lastname is correct\", function () {\r",
+              "    pm.expect(response.booking.lastname).to.eql(pm.iterationData.get(\"lastname\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Total Price is correct\", function () {\r",
+              "    pm.expect(response.booking.totalprice).to.eql(pm.iterationData.get(\"totalprice\"));\r",
               "});"
             ],
             "type": "text/javascript",
@@ -106,7 +114,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"firstname\": \"John\",\r\n    \"lastname\": \"Doe\",\r\n    \"totalprice\": 1000,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2026-08-01\",\r\n        \"checkout\": \"2026-08-05\"\r\n    },\r\n    \"additionalneeds\": \"Breakfast\"\r\n}",
+          "raw": "{\r\n    \"firstname\": \"{{firstname}}\",\r\n    \"lastname\": \"{{lastname}}\",\r\n    \"totalprice\": {{totalprice}},\r\n    \"depositpaid\": {{depositpaid}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{checkin}}\",\r\n        \"checkout\": \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalneeds}}\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -138,24 +146,31 @@
               "    pm.response.to.have.status(200);\r",
               "});\r",
               "\r",
-              "pm.test(\"Firstname is John\", function () {\r",
-              "    pm.expect(response.firstname).to.eql(\"John\");\r",
+              "pm.test(\"Firstname is correct\", function () {\r",
+              "    pm.expect(response.firstname).to.eql(pm.iterationData.get(\"firstname\"));\r",
               "});\r",
               "\r",
-              "pm.test(\"Lastname is Doe\", function () {\r",
-              "    pm.expect(response.lastname).to.eql(\"Doe\");\r",
+              "pm.test(\"Lastname is correct\", function () {\r",
+              "    pm.expect(response.lastname).to.eql(pm.iterationData.get(\"lastname\"));\r",
               "});\r",
               "\r",
-              "pm.test(\"Total Price is 1000\", function () {\r",
-              "    pm.expect(response.totalprice).to.eql(1000);\r",
+              "pm.test(\"Total Price is correct\", function () {\r",
+              "    pm.expect(response.totalprice).to.eql(pm.iterationData.get(\"totalprice\"));\r",
               "});\r",
               "\r",
-              "pm.test(\"Deposit Paid is true\", function () {\r",
-              "    pm.expect(response.depositpaid).to.eql(true);\r",
+              "pm.test(\"Deposit Paid is correct\", function () {\r",
+              "    pm.expect(response.depositpaid).to.eql(pm.iterationData.get(\"depositpaid\"));\r",
               "});\r",
               "\r",
-              "pm.test(\"Additional Needs is Breakfast\", function () {\r",
-              "    pm.expect(response.additionalneeds).to.eql(\"Breakfast\");\r",
+              "pm.test(\"Additional Needs is correct\", function () {\r",
+              "    pm.expect(response.additionalneeds).to.eql(pm.iterationData.get(\"additionalneeds\"));\r",
+              "});\r",
+              "pm.test(\"Check-in date is correct\", function () {\r",
+              "    pm.expect(response.bookingdates.checkin).to.eql(pm.iterationData.get(\"checkin\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check-out date is correct\", function () {\r",
+              "    pm.expect(response.bookingdates.checkout).to.eql(pm.iterationData.get(\"checkout\"));\r",
               "});"
             ],
             "type": "text/javascript",
@@ -194,15 +209,31 @@
               "});\r",
               "\r",
               "pm.test(\"Firstname Updated\", function () {\r",
-              "    pm.expect(response.firstname).to.eql(\"Praveen\");\r",
+              "    pm.expect(response.firstname).to.eql(pm.iterationData.get(\"firstname\"));\r",
               "});\r",
               "\r",
               "pm.test(\"Lastname Updated\", function () {\r",
-              "    pm.expect(response.lastname).to.eql(\"Kumar\");\r",
+              "    pm.expect(response.lastname).to.eql(pm.iterationData.get(\"lastname\"));\r",
               "});\r",
               "\r",
               "pm.test(\"Price Updated\", function () {\r",
-              "    pm.expect(response.totalprice).to.eql(2500);\r",
+              "    pm.expect(response.totalprice).to.eql(pm.iterationData.get(\"totalprice\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Deposit Paid Updated\", function () {\r",
+              "    pm.expect(response.depositpaid).to.eql(pm.iterationData.get(\"depositpaid\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Additional Needs Updated\", function () {\r",
+              "    pm.expect(response.additionalneeds).to.eql(pm.iterationData.get(\"additionalneeds\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check-in Updated\", function () {\r",
+              "    pm.expect(response.bookingdates.checkin).to.eql(pm.iterationData.get(\"checkin\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check-out Updated\", function () {\r",
+              "    pm.expect(response.bookingdates.checkout).to.eql(pm.iterationData.get(\"checkout\"));\r",
               "});"
             ],
             "type": "text/javascript",
@@ -232,7 +263,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"firstname\": \"Praveen\",\r\n    \"lastname\": \"Kumar\",\r\n    \"totalprice\": 2500,\r\n    \"depositpaid\": true,\r\n    \"bookingdates\": {\r\n        \"checkin\": \"2026-09-01\",\r\n        \"checkout\": \"2026-09-10\"\r\n    },\r\n    \"additionalneeds\": \"Lunch\"\r\n}",
+          "raw": "{\r\n    \"firstname\": \"{{firstname}}\",\r\n    \"lastname\": \"{{lastname}}\",\r\n    \"totalprice\": {{totalprice}},\r\n    \"depositpaid\": {{depositpaid}},\r\n    \"bookingdates\": {\r\n        \"checkin\": \"{{checkin}}\",\r\n        \"checkout\": \"{{checkout}}\"\r\n    },\r\n    \"additionalneeds\": \"{{additionalneeds}}\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -266,19 +297,31 @@
               "});\r",
               "\r",
               "pm.test(\"Firstname updated\", function () {\r",
-              "    pm.expect(response.firstname).to.eql(\"Praveen\");\r",
+              "    pm.expect(response.firstname).to.eql(pm.iterationData.get(\"firstname\"));\r",
               "});\r",
               "\r",
               "pm.test(\"Lastname updated\", function () {\r",
-              "    pm.expect(response.lastname).to.eql(\"Kumar\");\r",
+              "    pm.expect(response.lastname).to.eql(pm.iterationData.get(\"lastname\"));\r",
               "});\r",
               "\r",
               "pm.test(\"Price updated\", function () {\r",
-              "    pm.expect(response.totalprice).to.eql(2500);\r",
+              "    pm.expect(response.totalprice).to.eql(pm.iterationData.get(\"totalprice\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Deposit Paid updated\", function () {\r",
+              "    pm.expect(response.depositpaid).to.eql(pm.iterationData.get(\"depositpaid\"));\r",
               "});\r",
               "\r",
               "pm.test(\"Additional needs updated\", function () {\r",
-              "    pm.expect(response.additionalneeds).to.eql(\"Lunch\");\r",
+              "    pm.expect(response.additionalneeds).to.eql(pm.iterationData.get(\"additionalneeds\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check-in updated\", function () {\r",
+              "    pm.expect(response.bookingdates.checkin).to.eql(pm.iterationData.get(\"checkin\"));\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Check-out updated\", function () {\r",
+              "    pm.expect(response.bookingdates.checkout).to.eql(pm.iterationData.get(\"checkout\"));\r",
               "});"
             ],
             "type": "text/javascript",
@@ -334,6 +377,43 @@
             "type": "text"
           }
         ],
+        "url": {
+          "raw": "{{baseurl}}/booking/{{bookingid}}",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "booking",
+            "{{bookingid}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Verify Delete",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Booking deleted successfully\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
         "url": {
           "raw": "{{baseurl}}/booking/{{bookingid}}",
           "host": [
